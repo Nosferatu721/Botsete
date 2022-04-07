@@ -2,138 +2,154 @@ const puppeteer = require('puppeteer');
 const { Client, Buttons, List, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // window.Store.genId = window.Store.MsgKey.newId;
 
+const marcarTurnoRandom = () => Math.ceil(Math.random() * 14) + 10;
+const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
+
 const arr = [
   {
     user: 'elkin.torres',
     password: 'Nosferatu721*',
-    minTurno: 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
-  },
-  {
-    user: 'Diego.Rendon',
-    password: '!Qwerty28*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
-    numero: '573003079207',
   },
 ];
 const arrC = [
   {
     user: 'elkin.torres',
     password: 'Nosferatu721*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
   },
   {
     user: 'eyhson.castro',
     password: 'Rpa2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
   },
   {
     user: 'juan.vargas2',
     password: 'Colombia2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573219906245',
   },
   {
     user: 'michel.ibañez',
     password: 'Rpa2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573185303259',
   },
   {
     user: 'brayan.yanez1',
     password: 'Rpa2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573053599685',
   },
   {
     user: 'RAMON.ROZO',
     password: 'Cos2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573102970334',
   },
   {
     user: 'MANUEL.CORDOBA',
     password: 'Colombia2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
     password: 'Noxvile99.',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
   },
   {
     user: 'carlos.santos',
     password: 'Canada76455**',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573196431972',
   },
   {
     user: 'david.parra',
     password: 'Colombia22*$',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573124640886',
   },
   {
     user: 'daniel.orjuela',
     password: 'Rpa2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573194447056',
   },
   {
     user: 'zaira.luna',
     password: 'Colombia123*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573022249441',
   },
   {
     user: 'mario.reyes',
     password: 'Credibanco2023*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573006870762',
   },
   {
     user: 'julian.sanchez1',
     password: 'Juliansanchez0$',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573152909024',
   },
   {
     user: 'elquin.cascavita',
     password: 'Emcr2022*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
     numero: '573052905250',
   },
   {
     user: 'Diego.Rendon',
     password: '!Qwerty28*',
-    minTurno: Math.ceil(Math.random() * 14) + 5,
-    cerrarTurno: Math.ceil(Math.random() * 10) + 35,
-    numero: '57',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573003079207',
+  },
+  {
+    user: 'GERSON.VELANDIA',
+    password: 'Colombia*2020',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573108740840',
+  },
+  {
+    user: 'JUAN.CASTA12',
+    password: 'Juan7650817*',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573016650947',
+  },
+  {
+    user: 'roger.rodri',
+    password: '*Saratoga2023*',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573125634645',
   },
 ];
-console.log(arr);
-
+arr.forEach((el) => console.log(`${el.user} \t--- ${el.minTurno} \t--- ${el.numero}`));
 // * Funcion pa Logear
 const logear = async (usr, forzar = false) => {
   let hoy = new Date(Date.now()),
@@ -338,12 +354,16 @@ clientWP.on('qr', (qr) => {
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
     let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(usr.numero + '@c.us', `Que se dice *${usr.user}* el Botsete te marcara turno a las *7:${minut}am*.\n-> El Bot se puede demorar hasta 4 minutos en responder \nCambio y fuera ༼☞◕_◕༽☞`);
+    clientWP.sendMessage(
+      usr.numero + '@c.us',
+      `Que se dice *${usr.user}* el Botsete te marcara turno a las *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder \n*PAPITAS* Para verificar si marco turno o marcar si no lo esta \n*CHOCLITOS* Para Cerrar Turno\nCambio y fuera ༼☞◕_◕༽☞`
+    );
     logear(usr);
   });
 });
 
 clientWP.on('message', async (msg) => {
+  // * Para Marcar Turno
   if (msg.type == 'chat' && msg.body == 'PAPITAS') {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
@@ -353,6 +373,7 @@ clientWP.on('message', async (msg) => {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
+  // * Para Cerrar Turno
   if (msg.type == 'chat' && msg.body == 'CHOCLITOS') {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
@@ -362,7 +383,8 @@ clientWP.on('message', async (msg) => {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
-  if (msg.type == 'chat' && msg.body == 'MENU') {
+  // * Para Marcar Turno a Alguien
+  if (msg.type == 'chat' && msg.body == 'DORITOS') {
     const options = arr.map((el) => {
       let obje = { title: el.user };
       return obje;
