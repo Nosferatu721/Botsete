@@ -1,20 +1,20 @@
 const puppeteer = require('puppeteer');
-const { Client, Buttons, List, MessageMedia, NoAuth } = require('whatsapp-web.js');
-// window.Store.genId = window.Store.MsgKey.newId;
+const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
+// window.Store.genId = window.Store.MsgKey.newId; 513434
 
-const marcarTurnoRandom = () => Math.ceil(Math.random() * 14) + 10;
+const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 15;
 const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
 
-const arr = [
+const arrC = [
   {
-    user: 'elkin.torres',
-    password: 'Nosferatu721*',
+    user: 'Diego.Rendon',
+    password: '!Qwerty28*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
-    numero: '573134814366',
+    numero: '573003079207',
   },
 ];
-const arrC = [
+const arr = [
   {
     user: 'elkin.torres',
     password: 'Nosferatu721*',
@@ -24,7 +24,7 @@ const arrC = [
   },
   {
     user: 'eyhson.castro',
-    password: 'Rpa2022*',
+    password: 'Rpa2022#',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
@@ -59,14 +59,14 @@ const arrC = [
   },
   {
     user: 'MANUEL.CORDOBA',
-    password: 'Colombia2022*',
+    password: 'Colombia92*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
-    password: 'Noxvile99.',
+    password: 'Noxvile99+',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
@@ -136,7 +136,7 @@ const arrC = [
   },
   {
     user: 'JUAN.CASTA12',
-    password: 'Juan7650817*',
+    password: 'Juan7650817.',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573016650947',
@@ -149,7 +149,8 @@ const arrC = [
     numero: '573125634645',
   },
 ];
-arr.forEach((el) => console.log(`${el.user} \t--- ${el.minTurno} \t--- ${el.numero}`));
+arr.forEach((el) => console.log(`${el.minTurno} \t${el.user}`));
+
 // * Funcion pa Logear
 const logear = async (usr, forzar = false) => {
   let hoy = new Date(Date.now()),
@@ -220,9 +221,9 @@ const logear = async (usr, forzar = false) => {
                     setTimeout(async () => {
                       await page.close();
                       await browser.close();
-                    }, 3000);
-                  }, 3000);
-                }, 3000);
+                    }, 4000);
+                  }, 4000);
+                }, 4000);
               }, 3000);
             }
           }, 5000);
@@ -250,7 +251,7 @@ const logout = async (usr) => {
     hora = hoy.getHours(),
     minutoActual = hoy.getMinutes();
 
-  if (hora >= 17) {
+  if (hora >= 16) {
     clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cerrando Turno* ☜(ﾟヮﾟ☜) ...');
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -343,7 +344,7 @@ const clientWP = new Client({
   },
   authTimeoutMs: 3600000,
   clientId: 'sesion_mibot',
-  authStrategy: new NoAuth(),
+  authStrategy: new LocalAuth({clientId: 'cliente-one'})
 });
 
 clientWP.on('qr', (qr) => {
