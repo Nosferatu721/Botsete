@@ -431,10 +431,10 @@
   "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
   "version" "3.0.1"
 
-"whatsapp-web.js@1.16.4-alpha.0":
-  "integrity" "sha512-UCCY6HQ4quecbkOeOyZR958RRm3/B+/Plf7DTNkruBO/Hr7nxvqacmRnhD6g1w+aPowi/XevnDsqDjTtU/TlcQ=="
-  "resolved" "https://registry.npmjs.org/whatsapp-web.js/-/whatsapp-web.js-1.16.4-alpha.0.tgz"
-  "version" "1.16.4-alpha.0"
+"whatsapp-web.js@^1.16.6":
+  "integrity" "sha512-y60KszDx15sBWrRC/+p4tQHb0CFStcvrFuDLzaD+weBiXL22CK5/RLaHG9qLE8Z2Nsac6TV8MxiBvVssR5FSqA=="
+  "resolved" "https://registry.npmjs.org/whatsapp-web.js/-/whatsapp-web.js-1.16.6.tgz"
+  "version" "1.16.6"
   dependencies:
     "@pedroslopez/moduleraid" "^5.0.2"
     "fluent-ffmpeg" "^2.1.2"

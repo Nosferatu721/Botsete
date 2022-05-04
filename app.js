@@ -2,8 +2,18 @@ const puppeteer = require('puppeteer');
 const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
 // window.Store.genId = window.Store.MsgKey.newId; 513434
 
-const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 15;
-const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
+const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 5;
+const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 37;
+
+const arrD = [
+  {
+    user: 'elkin.torres',
+    password: 'Nosferatu721*',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573134814366',
+  },
+];
 
 const arrC = [
   {
@@ -17,7 +27,7 @@ const arrC = [
 const arr = [
   {
     user: 'elkin.torres',
-    password: 'Nosferatu721*',
+    password: 'Nosferatu2022*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
@@ -31,28 +41,21 @@ const arr = [
   },
   {
     user: 'juan.vargas2',
-    password: 'Colombia2022*',
+    password: 'Rpa2022*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573219906245',
   },
   {
-    user: 'michel.ibañez',
-    password: 'Rpa2022*',
-    minTurno: marcarTurnoRandom(),
-    cerrarTurno: cerrarTurnoRandom(),
-    numero: '573185303259',
-  },
-  {
     user: 'brayan.yanez1',
-    password: 'Rpa2022*',
+    password: 'Rpa2022*5',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573053599685',
   },
   {
     user: 'RAMON.ROZO',
-    password: 'Cos2022*',
+    password: 'Cos2022*5',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573102970334',
@@ -79,43 +82,36 @@ const arr = [
     numero: '573196431972',
   },
   {
-    user: 'david.parra',
-    password: 'Colombia22*$',
-    minTurno: marcarTurnoRandom(),
-    cerrarTurno: cerrarTurnoRandom(),
-    numero: '573124640886',
-  },
-  {
     user: 'daniel.orjuela',
-    password: 'Rpa2022*',
+    password: 'Rpa2022**',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573194447056',
   },
   {
     user: 'zaira.luna',
-    password: 'Colombia123*',
+    password: 'Colombia123#',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573022249441',
   },
   {
     user: 'mario.reyes',
-    password: 'Credibanco2023*',
+    password: 'Credibanco2024*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573006870762',
   },
   {
     user: 'julian.sanchez1',
-    password: 'Juliansanchez0$',
+    password: 'Campeones2020*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573152909024',
   },
   {
     user: 'elquin.cascavita',
-    password: 'Emcr2022*',
+    password: '123456Je*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573052905250',
@@ -128,13 +124,6 @@ const arr = [
     numero: '573003079207',
   },
   {
-    user: 'GERSON.VELANDIA',
-    password: 'Colombia*2020',
-    minTurno: marcarTurnoRandom(),
-    cerrarTurno: cerrarTurnoRandom(),
-    numero: '573108740840',
-  },
-  {
     user: 'JUAN.CASTA12',
     password: 'Juan7650817.',
     minTurno: marcarTurnoRandom(),
@@ -143,16 +132,23 @@ const arr = [
   },
   {
     user: 'roger.rodri',
-    password: '*Saratoga2023*',
+    password: '*Saratoga2024*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
   },
+  {
+    user: 'leon.gomez',
+    password: 'Cos77779*',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: cerrarTurnoRandom(),
+    numero: '573013775932',
+  },
 ];
-arr.forEach((el) => console.log(`${el.minTurno} \t${el.user}`));
+arr.forEach((el) => console.log(`${el.minTurno} ---- ${el.cerrarTurno} \t${el.user}`));
 
 // * Funcion pa Logear
-const logear = async (usr, forzar = false) => {
+const logear = async (usr, forzar = false, reintentar = false) => {
   let hoy = new Date(Date.now()),
     hora = hoy.getHours(),
     minutoActual = hoy.getMinutes();
@@ -180,60 +176,70 @@ const logear = async (usr, forzar = false) => {
           return elm ? true : false;
         });
 
-        if (logeado) {
-          console.log(usr.user, 'Logeado', logeado);
-          await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+        setTimeout(async () => {
+          if (logeado) {
+            console.log(usr.user, 'Logeado', logeado);
+            await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
 
-          const text = await page.evaluate(() => document.querySelector('[mat-menu-item]'));
-          if (text === null) {
-            clientWP.sendMessage(usr.numero + '@c.us', 'Sin Horarios ╰（‵□′）╯');
-            setTimeout(async () => {
-              await page.close();
-              await browser.close();
-            }, 3000);
-            return;
-          }
-          const turnoMarcado = await page.evaluate(() => document.querySelector('[mat-menu-item]').innerHTML.includes('color: green'));
-          const classNameJ = await page.evaluate(() => document.querySelector('[mat-menu-item]').className);
-
-          setTimeout(async () => {
-            if (turnoMarcado) {
-              await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
-              console.log('Ya se habia marcado turno ༼ つ ◕_◕ ༽つ');
-              clientWP.sendMessage(usr.numero + '@c.us', `Ya se habia marcado turno *${usr.user}* ༼ つ ◕_◕ ༽つ`);
-              const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
-              clientWP.sendMessage(usr.numero + '@c.us', media);
+            const text = await page.evaluate(() => document.querySelector('[mat-menu-item]'));
+            if (text === null) {
+              clientWP.sendMessage(usr.numero + '@c.us', 'Sin Horarios *╰（‵□′）╯*');
               setTimeout(async () => {
                 await page.close();
                 await browser.close();
               }, 3000);
-            } else {
-              setTimeout(async () => {
-                await page.click(`.${classNameJ.split(' ').slice(0, 3).join('.')}`);
+              return;
+            }
+            const turnoMarcado = await page.evaluate(() => document.querySelector('[mat-menu-item]').innerHTML.includes('color: green'));
+            const classNameJ = await page.evaluate(() => document.querySelector('[mat-menu-item]').className);
+
+            setTimeout(async () => {
+              if (turnoMarcado) {
+                await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
+                console.log('Ya se habia marcado turno *༼つ◕_◕༽つ*');
+                clientWP.sendMessage(usr.numero + '@c.us', `Ya se habia marcado turno *${usr.user}* *༼つ◕_◕༽つ*`);
+                const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
+                clientWP.sendMessage(usr.numero + '@c.us', media);
                 setTimeout(async () => {
-                  await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+                  await page.close();
+                  await browser.close();
+                }, 3000);
+              } else {
+                setTimeout(async () => {
+                  await page.click(`.${classNameJ.split(' ').slice(0, 3).join('.')}`);
                   setTimeout(async () => {
-                    await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
-                    clientWP.sendMessage(usr.numero + '@c.us', `Listo *${usr.user}* se marco turno ༼ つ ◕_◕ ༽つ`);
-                    const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
-                    clientWP.sendMessage(usr.numero + '@c.us', media);
-                    console.log('Se supone que marco turno ༼ つ ◕_◕ ༽つ', usr.user);
+                    await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
                     setTimeout(async () => {
-                      await page.close();
-                      await browser.close();
+                      // await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
+                      clientWP.sendMessage(usr.numero + '@c.us', `*${usr.user}* se marco turno ༼つ◕_◕༽つ`);
+                      // const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
+                      // clientWP.sendMessage(usr.numero + '@c.us', media);
+                      console.log('Se supone que marco turno *༼つ◕_◕༽つ*', usr.user);
+                      setTimeout(async () => {
+                        await page.close();
+                        await browser.close();
+                      }, 4000);
                     }, 4000);
                   }, 4000);
-                }, 4000);
-              }, 3000);
-            }
-          }, 5000);
-        } else {
-          clientWP.sendMessage(usr.numero + '@c.us', 'Contraseña Incorrecta o SOUL pide cambio de contraseña, Intente otra vez por si las moscas \nEnvia la palabra *PAPITAS* para intentar logear');
-        }
+                }, 3000);
+              }
+            }, 5000);
+          } else {
+            clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Se peto el Google');
+            setTimeout(async () => {
+              await page.close();
+              await browser.close();
+              if (!reintentar) {
+                clientWP.sendMessage(usr.numero + '@c.us', '♦♣ *Intentando Marcar ...*');
+                logout(usr, true, true);
+              }
+            }, 3000);
+          }
+        }, 2000);
       }, 5000);
       return;
     } catch (error) {
-      clientWP.sendMessage(usr.numero + '@c.us', 'Hubo un Error ಥ_ಥ');
+      clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Hubo un Error ಥ_ಥ');
       console.log('Hubo un Error ಥ_ಥ', error);
       return;
     }
@@ -246,93 +252,107 @@ const logear = async (usr, forzar = false) => {
 };
 
 // * Funcion pa Deslogear
-const logout = async (usr) => {
+const logout = async (usr, forzar = false, reintentar = false) => {
   let hoy = new Date(Date.now()),
     hora = hoy.getHours(),
     minutoActual = hoy.getMinutes();
 
-  if (hora >= 16) {
-    clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cerrando Turno* ☜(ﾟヮﾟ☜) ...');
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
-    await page.setViewport({
-      width: 1440,
-      height: 800,
-      deviceScaleFactor: 1,
-    });
-    await page.goto('https://mysoul.groupcos.com/login', { timeout: 0, waitUntil: 'load' });
-
-    await page.type('#mat-input-0', usr.user);
-
-    await page.type('#mat-input-1', usr.password);
-    await page.click('[mat-raised-button]');
-
-    setTimeout(async () => {
-      let logeado = await page.evaluate(() => {
-        let elm = document.querySelector('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
-        return elm ? true : false;
+  if ((hora === 17 && minutoActual === usr.cerrarTurno) || forzar) {
+    try {
+      clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cerrando Turno* ☜(ﾟヮﾟ☜) ...');
+      const browser = await puppeteer.launch({ headless: false });
+      const page = await browser.newPage();
+      await page.setViewport({
+        width: 1440,
+        height: 800,
+        deviceScaleFactor: 1,
       });
+      await page.goto('https://mysoul.groupcos.com/login', { timeout: 0, waitUntil: 'load' });
 
-      if (logeado) {
-        console.log(usr.user, 'Logeado', logeado);
-        await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+      await page.type('#mat-input-0', usr.user);
 
-        const text = await page.evaluate(() => document.querySelector('[mat-menu-item]'));
-        if (text === null) {
-          clientWP.sendMessage(usr.numero + '@c.us', 'Sin Horarios ╰（‵□′）╯');
-          setTimeout(async () => {
-            await page.close();
-            await browser.close();
-          }, 3000);
-          return;
-        }
-        const turnoMarcado = await page.evaluate(() => document.querySelector('[mat-menu-item]').innerHTML.includes('color: green'));
-        const classNameJ = await await page.evaluate(() => document.querySelector('[mat-menu-item]').className);
+      await page.type('#mat-input-1', usr.password);
+      await page.click('[mat-raised-button]');
+
+      setTimeout(async () => {
+        let logeado = await page.evaluate(() => {
+          let elm = document.querySelector('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+          return elm ? true : false;
+        });
 
         setTimeout(async () => {
-          if (turnoMarcado) {
-            console.log('Pa Cerrar Turno ༼ つ ◕_◕ ༽つ');
-            await page.click(`[mat-menu-item]`);
-            setTimeout(async () => {
-              await page.click(`.swal2-confirm.swal2-styled`);
+          if (logeado) {
+            console.log(usr.user, 'Logeado', logeado);
+            await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+
+            const text = await page.evaluate(() => document.querySelector('[mat-menu-item]'));
+            if (text === null) {
+              clientWP.sendMessage(usr.numero + '@c.us', 'Sin Horarios ╰（‵□′）╯');
               setTimeout(async () => {
-                await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+                await page.close();
+                await browser.close();
+              }, 3000);
+              return;
+            }
+            const turnoMarcado = await page.evaluate(() => document.querySelector('[mat-menu-item]').innerHTML.includes('color: green'));
+            const classNameJ = await await page.evaluate(() => document.querySelector('[mat-menu-item]').className);
+
+            setTimeout(async () => {
+              if (turnoMarcado) {
+                console.log('Pa Cerrar Turno *༼つ◕_◕༽つ*');
+                await page.click(`[mat-menu-item]`);
                 setTimeout(async () => {
-                  await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
-                  clientWP.sendMessage(usr.numero + '@c.us', `Has sido expropiado *${usr.user}* jajaja ༼ つ ◕_◕ ༽つ`);
-                  const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
-                  clientWP.sendMessage(usr.numero + '@c.us', media);
-                  console.log('Deslogeado', usr.user);
+                  await page.click(`.swal2-confirm.swal2-styled`);
                   setTimeout(async () => {
-                    await page.close();
-                    await browser.close();
-                  }, 3000);
+                    await page.click('.mat-list-item.mat-focus-indicator.mat-menu-trigger');
+                    setTimeout(async () => {
+                      // await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
+                      clientWP.sendMessage(usr.numero + '@c.us', `Turno Cerrado *${usr.user}* *༼つ◕_◕༽つ*`);
+                      // const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
+                      // clientWP.sendMessage(usr.numero + '@c.us', media);
+                      console.log('Deslogeado', usr.user);
+                      setTimeout(async () => {
+                        await page.close();
+                        await browser.close();
+                      }, 3000);
+                    }, 3000);
+                  }, 4000);
                 }, 3000);
-              }, 4000);
-            }, 3000);
+              } else {
+                await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
+                clientWP.sendMessage(usr.numero + '@c.us', 'Parece que ya habias cerrado turno antes *༼つ◕_◕༽つ*');
+                const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
+                clientWP.sendMessage(usr.numero + '@c.us', media);
+                setTimeout(async () => {
+                  await page.close();
+                  await browser.close();
+                }, 3000);
+              }
+            }, 5000);
           } else {
-            await page.screenshot({ path: `./img/${usr.user}.png`, fullPage: true });
-            clientWP.sendMessage(usr.numero + '@c.us', 'Parece que ya habias cerrado turno antes *༼つ◕_◕༽つ*');
-            const media = MessageMedia.fromFilePath(`./img/${usr.user}.png`);
-            clientWP.sendMessage(usr.numero + '@c.us', media);
+            clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Se peto el Google');
             setTimeout(async () => {
               await page.close();
               await browser.close();
+              if (!reintentar) {
+                clientWP.sendMessage(usr.numero + '@c.us', '♦♣ *Intentando Cerrar ...*');
+                logout(usr, true, true);
+              }
             }, 3000);
           }
-        }, 5000);
-      } else {
-        clientWP.sendMessage(usr.numero + '@c.us', 'Contraseña Incorrecta, Intente otra vez por si las moscas');
-        setTimeout(async () => {
-          await page.close();
-          await browser.close();
-        }, 3000);
-      }
-    }, 5000);
-    return;
+        }, 2000);
+      }, 5000);
+      return;
+    } catch (error) {
+      clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Hubo un Error ಥ_ಥ');
+      console.log('Hubo un Error ಥ_ಥ', error);
+      return;
+    }
   } else {
-    clientWP.sendMessage(usr.numero + '@c.us', 'No es hora de DesLogear ಠ_ಠ Sap@prr ╰（‵□′）╯');
-    console.log(usr.user, 'No es hora de DesLogear ಠ_ಠ Sap@prr', hora, minutoActual);
+    console.log(usr.user, 'No es hora de CERRAR TURNO ಠ_ಠ Sap@prr', hora, minutoActual);
+    setTimeout(() => {
+      logout(usr);
+    }, 30000);
   }
 };
 
@@ -344,7 +364,7 @@ const clientWP = new Client({
   },
   authTimeoutMs: 3600000,
   clientId: 'sesion_mibot',
-  authStrategy: new LocalAuth({clientId: 'cliente-one'})
+  authStrategy: new LocalAuth({ clientId: 'cliente-one' }),
 });
 
 clientWP.on('qr', (qr) => {
@@ -355,11 +375,12 @@ clientWP.on('qr', (qr) => {
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
     let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(
-      usr.numero + '@c.us',
-      `Que se dice *${usr.user}* el Botsete te marcara turno a las *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder \n*PAPITAS* Para verificar si marco turno o marcar si no lo esta \n*CHOCLITOS* Para Cerrar Turno\nCambio y fuera ༼☞◕_◕༽☞`
-    );
+    // clientWP.sendMessage(
+    //   usr.numero + '@c.us',
+    //   `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nCerrar Turno:: *5:${usr.cerrarTurno}pm*.\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`
+    // );
     logear(usr);
+    logout(usr);
   });
 });
 
@@ -379,27 +400,44 @@ clientWP.on('message', async (msg) => {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
     if (inList.length >= 1) {
-      logout(inList[0]);
+      logout(inList[0], true);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
   // * Para Marcar Turno a Alguien
-  if (msg.type == 'chat' && msg.body == 'DORITOS') {
+  if (msg.type == 'chat' && msg.body == 'DORITOZ') {
     const options = arr.map((el) => {
       let obje = { title: el.user };
       return obje;
     });
     const menu = [{ title: 'Opciones:', rows: options }];
-    const lista = new List('Users: ', 'Seleccione una opción', menu);
+    const lista = new List('♦♣ Pa Marcar Turno: ', 'Seleccione una opción', menu);
     clientWP.sendMessage(msg.from, lista);
   }
-  if (msg.type == 'list_response') {
+  if (msg.type == 'list_response' && !msg.body.includes('XDDD')) {
     console.log(msg.body);
     let inListUser = arr.filter((el) => el.user === msg.body);
     if (inListUser.length >= 1) {
-      console.log(inListUser[0]);
       logear(inListUser[0], true);
+    } else {
+      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+    }
+  }
+  // * Pa Cerrar Turno
+  if (msg.type == 'chat' && msg.body == 'MAIZITOZ') {
+    const options = arr.map((el) => {
+      let obje = { title: el.user + 'XDDD' };
+      return obje;
+    });
+    const menu = [{ title: 'Opciones:', rows: options }];
+    const lista = new List('♦♣ Pa Cerrar Turno: ', 'Seleccione una opción', menu);
+    clientWP.sendMessage(msg.from, lista);
+  }
+  if (msg.type == 'list_response' && msg.body.includes('XDDD')) {
+    let inListUser = arr.filter((el) => el.user === msg.body.replace('XDDD', ''));
+    if (inListUser.length >= 1) {
+      logout(inListUser[0], true);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
