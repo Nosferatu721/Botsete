@@ -3,7 +3,7 @@ const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web
 // window.Store.genId = window.Store.MsgKey.newId; 513434
 
 const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 5;
-const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 37;
+const cerrarTurnoRandom = () => Math.ceil(Math.random() * 8) + 51;
 
 const arrD = [
   {
@@ -14,11 +14,10 @@ const arrD = [
     numero: '573134814366',
   },
 ];
-
 const arrC = [
   {
     user: 'Diego.Rendon',
-    password: '!Qwerty28*',
+    password: 'Papitas28*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -34,7 +33,7 @@ const arr = [
   },
   {
     user: 'eyhson.castro',
-    password: 'Rpa2022#',
+    password: 'Papitas2022#',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
@@ -62,14 +61,14 @@ const arr = [
   },
   {
     user: 'MANUEL.CORDOBA',
-    password: 'Colombia92*',
+    password: 'Colombia93*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
-    password: 'Noxvile99+',
+    password: 'Noxvile99-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
@@ -118,21 +117,21 @@ const arr = [
   },
   {
     user: 'Diego.Rendon',
-    password: '!Qwerty28*',
+    password: 'Papitas28*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
   },
   {
     user: 'JUAN.CASTA12',
-    password: 'Juan7650817.',
+    password: 'Papitas2022#',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573016650947',
   },
   {
     user: 'roger.rodri',
-    password: '*Saratoga2024*',
+    password: 'Saratoga2024',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
@@ -231,7 +230,7 @@ const logear = async (usr, forzar = false, reintentar = false) => {
               await browser.close();
               if (!reintentar) {
                 clientWP.sendMessage(usr.numero + '@c.us', '♦♣ *Intentando Marcar ...*');
-                logout(usr, true, true);
+                logear(usr, true, true);
               }
             }, 3000);
           }
@@ -375,12 +374,12 @@ clientWP.on('qr', (qr) => {
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
     let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    // clientWP.sendMessage(
-    //   usr.numero + '@c.us',
-    //   `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nCerrar Turno:: *5:${usr.cerrarTurno}pm*.\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`
-    // );
+    clientWP.sendMessage(
+      usr.numero + '@c.us',
+      `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`
+    );
     logear(usr);
-    logout(usr);
+    // logout(usr);
   });
 });
 
@@ -400,7 +399,7 @@ clientWP.on('message', async (msg) => {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
     if (inList.length >= 1) {
-      logout(inList[0], true);
+      logout(inList[0], true, true);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
@@ -437,7 +436,7 @@ clientWP.on('message', async (msg) => {
   if (msg.type == 'list_response' && msg.body.includes('XDDD')) {
     let inListUser = arr.filter((el) => el.user === msg.body.replace('XDDD', ''));
     if (inListUser.length >= 1) {
-      logout(inListUser[0], true);
+      logout(inListUser[0], true, true);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
