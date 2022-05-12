@@ -1,20 +1,20 @@
 const puppeteer = require('puppeteer');
+const os = require('os');
 const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
-// window.Store.genId = window.Store.MsgKey.newId; 513434
 
 const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 5;
-const cerrarTurnoRandom = () => Math.ceil(Math.random() * 8) + 51;
+const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
 
-const arrD = [
+const arrC = [
   {
     user: 'elkin.torres',
-    password: 'Nosferatu721*',
+    password: 'Papitas4652*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
   },
 ];
-const arrC = [
+const arrD = [
   {
     user: 'Diego.Rendon',
     password: 'Papitas28*',
@@ -26,7 +26,7 @@ const arrC = [
 const arr = [
   {
     user: 'elkin.torres',
-    password: 'Nosferatu2022*',
+    password: 'Papitas4652*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
@@ -75,7 +75,7 @@ const arr = [
   },
   {
     user: 'carlos.santos',
-    password: 'Canada76455**',
+    password: 'Papitas5486*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573196431972',
@@ -131,7 +131,7 @@ const arr = [
   },
   {
     user: 'roger.rodri',
-    password: 'Saratoga2024',
+    password: '*Saratoga2024*',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
@@ -142,6 +142,13 @@ const arr = [
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573013775932',
+  },
+  {
+    user: 'KAREN.HERNANDEZ',
+    password: 'Temporal3*',
+    minTurno: marcarTurnoRandom(),
+    cerrarTurno: 48,
+    numero: '573192927421',
   },
 ];
 arr.forEach((el) => console.log(`${el.minTurno} ---- ${el.cerrarTurno} \t${el.user}`));
@@ -155,7 +162,7 @@ const logear = async (usr, forzar = false, reintentar = false) => {
   if ((hora === 7 && minutoActual === usr.minTurno) || forzar) {
     try {
       clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Logeando* ☜(ﾟヮﾟ☜) ...');
-      const browser = await puppeteer.launch({ headless: false, executablePath: '/usr/bin/google-chrome' });
+      const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
       const page = await browser.newPage();
       await page.setViewport({
         width: 1440,
@@ -259,7 +266,7 @@ const logout = async (usr, forzar = false, reintentar = false) => {
   if ((hora === 17 && minutoActual === usr.cerrarTurno) || forzar) {
     try {
       clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cerrando Turno* ☜(ﾟヮﾟ☜) ...');
-      const browser = await puppeteer.launch({ headless: false });
+      const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
       const page = await browser.newPage();
       await page.setViewport({
         width: 1440,
@@ -355,11 +362,61 @@ const logout = async (usr, forzar = false, reintentar = false) => {
   }
 };
 
+// * Cambiar Contraseña
+const changePassword = async (usr) => {
+  let randomPassword = `Papitas${Math.ceil(Math.random() * 10000)}*`;
+  console.log(randomPassword);
+  try {
+    const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+    const page = await browser.newPage();
+    await page.setViewport({
+      width: 1440,
+      height: 800,
+      deviceScaleFactor: 1,
+    });
+
+    await page.goto('https://mysoul.groupcos.com/login', { timeout: 0, waitUntil: 'load' });
+
+    // * Logeando en SOUL
+    await page.waitForTimeout(2000);
+
+    await page.type('#mat-input-0', usr.user);
+    await page.type('#mat-input-1', usr.password);
+    await page.click('[mat-raised-button]');
+
+    // * Dar Click en Perfil
+    await page.waitForTimeout(4000);
+    await page.click('.fi-rr-user');
+
+    // * Dar Click en Cambiar Contraseña
+    await page.waitForTimeout(4000);
+    await page.click('[mat-raised-button]');
+
+    // * Introducir Nueva Contraseña
+    await page.waitForTimeout(1000);
+    await page.type('#real-password', randomPassword);
+    await page.type('#real-confirm-password', randomPassword);
+    await page.click('div > [mat-raised-button].mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary');
+
+    // * Enviar Mensaje
+    clientWP.sendMessage(usr.numero + '@c.us', `♦♣ Contraseña Cambiada ♦♣ -> *${randomPassword}*`);
+
+    // * Cerrar Google
+    await page.waitForTimeout(2000);
+    await page.close();
+    await browser.close();
+  } catch (error) {
+    clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Hubo un Error Al Cambiar Contraseña ಥ_ಥ');
+    console.log('Hubo un Error Al Cambiar Contraseña ಥ_ಥ', error);
+    return;
+  }
+};
+
 // * Iniciar Wasap
 const clientWP = new Client({
   puppeteer: {
     headless: false,
-    executablePath: '/usr/bin/google-chrome',
+    executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe',
   },
   authTimeoutMs: 3600000,
   clientId: 'sesion_mibot',
@@ -373,12 +430,9 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(
-      usr.numero + '@c.us',
-      `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`
-    );
-    logear(usr);
+    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    // clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`);
+    // logear(usr);
     // logout(usr);
   });
 });
@@ -403,6 +457,19 @@ clientWP.on('message', async (msg) => {
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
+  }
+  // * Para Cambiar Contraseña
+  if (msg.type == 'chat' && msg.body == 'TODORICOZO') {
+    let numeroChat = msg.from.toString().replace('@c.us', '');
+    let inList = arr.filter((el) => el.numero === numeroChat);
+    if (inList.length >= 1) {
+      changePassword(inList[0]);
+    } else {
+      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+    }
+    // arr.forEach((usr) => {
+    //   changePassword(usr);
+    // });
   }
   // * Para Marcar Turno a Alguien
   if (msg.type == 'chat' && msg.body == 'DORITOZ') {
