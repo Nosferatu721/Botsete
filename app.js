@@ -148,7 +148,7 @@ const arr = [
     user: 'KAREN.HERNANDEZ',
     password: 'Papitas3212-',
     minTurno: marcarTurnoRandom(),
-    cerrarTurno: 48,
+    cerrarTurno: cerrarTurnoRandom() + 10,
     numero: '573192927421',
   },
 ];
@@ -436,9 +436,9 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    // clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.`);
-    // logear(usr);
+    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Cerrar Turno.`);
+    logear(usr);
     // logout(usr);
   });
 });
