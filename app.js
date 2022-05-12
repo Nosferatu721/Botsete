@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const os = require('os');
+const { spawn } = require('child_process');
 const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
 
 const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 5;
@@ -8,7 +9,7 @@ const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
 const arrC = [
   {
     user: 'elkin.torres',
-    password: 'Papitas4652*',
+    password: 'Papitas8710-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
@@ -17,7 +18,7 @@ const arrC = [
 const arrD = [
   {
     user: 'Diego.Rendon',
-    password: 'Papitas28*',
+    password: 'Papitas4657-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -26,126 +27,126 @@ const arrD = [
 const arr = [
   {
     user: 'elkin.torres',
-    password: 'Papitas4652*',
+    password: 'Papitas8710-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
   },
   {
     user: 'eyhson.castro',
-    password: 'Papitas2022#',
+    password: 'Papitas6736-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
   },
   {
     user: 'juan.vargas2',
-    password: 'Rpa2022*',
+    password: 'Papitas8710-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573219906245',
   },
   {
     user: 'brayan.yanez1',
-    password: 'Rpa2022*5',
+    password: 'Papitas4051-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573053599685',
   },
   {
     user: 'RAMON.ROZO',
-    password: 'Cos2022*5',
+    password: 'Papitas8554-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573102970334',
   },
   {
     user: 'MANUEL.CORDOBA',
-    password: 'Colombia93*',
+    password: 'Papitas6873-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
-    password: 'Noxvile99-',
+    password: 'Papitas8107-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
   },
   {
     user: 'carlos.santos',
-    password: 'Papitas5486*',
+    password: 'Papitas5825-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573196431972',
   },
   {
     user: 'daniel.orjuela',
-    password: 'Rpa2022**',
+    password: 'Papitas8605-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573194447056',
   },
   {
     user: 'zaira.luna',
-    password: 'Colombia123#',
+    password: 'Papitas6768-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573022249441',
   },
   {
     user: 'mario.reyes',
-    password: 'Credibanco2024*',
+    password: 'Papitas9653-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573006870762',
   },
   {
     user: 'julian.sanchez1',
-    password: 'Campeones2020*',
+    password: 'Papitas6914-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573152909024',
   },
   {
     user: 'elquin.cascavita',
-    password: '123456Je*',
+    password: 'Papitas3205-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573052905250',
   },
   {
     user: 'Diego.Rendon',
-    password: 'Papitas28*',
+    password: 'Papitas4657-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
   },
   {
     user: 'JUAN.CASTA12',
-    password: 'Papitas2022#',
+    password: 'Papitas8379-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573016650947',
   },
   {
     user: 'roger.rodri',
-    password: '*Saratoga2024*',
+    password: 'Papitas8557-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
   },
   {
     user: 'leon.gomez',
-    password: 'Cos77779*',
+    password: 'Papitas1866-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573013775932',
   },
   {
     user: 'KAREN.HERNANDEZ',
-    password: 'Temporal3*',
+    password: 'Papitas682-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: 48,
     numero: '573192927421',
@@ -364,9 +365,10 @@ const logout = async (usr, forzar = false, reintentar = false) => {
 
 // * Cambiar Contraseña
 const changePassword = async (usr) => {
-  let randomPassword = `Papitas${Math.ceil(Math.random() * 10000)}*`;
+  let randomPassword = `Papitas${Math.ceil(Math.random() * 10000)}-`;
   console.log(randomPassword);
   try {
+    // clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cambiando Contraseña* ☜(ﾟヮﾟ☜) ...');
     const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
     const page = await browser.newPage();
     await page.setViewport({
@@ -398,15 +400,21 @@ const changePassword = async (usr) => {
     await page.type('#real-confirm-password', randomPassword);
     await page.click('div > [mat-raised-button].mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary');
 
-    // * Enviar Mensaje
-    clientWP.sendMessage(usr.numero + '@c.us', `♦♣ Contraseña Cambiada ♦♣ -> *${randomPassword}*`);
-
     // * Cerrar Google
     await page.waitForTimeout(2000);
     await page.close();
     await browser.close();
+
+    // * Guardar Nueva Contraseña
+    // TODO sed -i 's/OldPassword/NewPassword/g' app.js
+    const sed = spawn('sed', ['-i', `s/${usr.password}/${randomPassword}/g`, 'app.js']);
+    sed.stdout.on('data', (data) => {
+      // * Enviar Mensaje
+      // clientWP.sendMessage(usr.numero + '@c.us', `♦♣ Contraseña Cambiada en SOUL♦♣ \nAhora es: *${randomPassword}*`);
+    });
+    console.log(`-> ${usr.user} -> ${randomPassword}`);
   } catch (error) {
-    clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Hubo un Error Al Cambiar Contraseña ಥ_ಥ');
+    // clientWP.sendMessage(usr.numero + '@c.us', '♦♣ Hubo un Error Al Cambiar Contraseña ಥ_ಥ');
     console.log('Hubo un Error Al Cambiar Contraseña ಥ_ಥ', error);
     return;
   }
@@ -458,19 +466,6 @@ clientWP.on('message', async (msg) => {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
-  // * Para Cambiar Contraseña
-  if (msg.type == 'chat' && msg.body == 'TODORICOZO') {
-    let numeroChat = msg.from.toString().replace('@c.us', '');
-    let inList = arr.filter((el) => el.numero === numeroChat);
-    if (inList.length >= 1) {
-      changePassword(inList[0]);
-    } else {
-      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
-    }
-    // arr.forEach((usr) => {
-    //   changePassword(usr);
-    // });
-  }
   // * Para Marcar Turno a Alguien
   if (msg.type == 'chat' && msg.body == 'DORITOZ') {
     const options = arr.map((el) => {
@@ -481,7 +476,7 @@ clientWP.on('message', async (msg) => {
     const lista = new List('♦♣ Pa Marcar Turno: ', 'Seleccione una opción', menu);
     clientWP.sendMessage(msg.from, lista);
   }
-  if (msg.type == 'list_response' && !msg.body.includes('XDDD')) {
+  if (msg.type == 'list_response' && !msg.body.includes('XDDD') && !msg.body.includes('XCCC')) {
     console.log(msg.body);
     let inListUser = arr.filter((el) => el.user === msg.body);
     if (inListUser.length >= 1) {
@@ -504,6 +499,24 @@ clientWP.on('message', async (msg) => {
     let inListUser = arr.filter((el) => el.user === msg.body.replace('XDDD', ''));
     if (inListUser.length >= 1) {
       logout(inListUser[0], true, true);
+    } else {
+      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+    }
+  }
+  // * Para Cambiar Contraseña
+  if (msg.type == 'chat' && msg.body == 'TODORICOZ') {
+    const options = arr.map((el) => {
+      let obje = { title: el.user + 'XCCC' };
+      return obje;
+    });
+    const menu = [{ title: 'Opciones:', rows: options }];
+    const lista = new List('♦♣ Pa Cambiar Contraseña: ', 'Seleccione una opción', menu);
+    clientWP.sendMessage(msg.from, lista);
+  }
+  if (msg.type == 'list_response' && msg.body.includes('XCCC')) {
+    let inListUser = arr.filter((el) => el.user === msg.body.replace('XCCC', ''));
+    if (inListUser.length >= 1) {
+      changePassword(inListUser[0]);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
