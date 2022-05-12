@@ -437,7 +437,7 @@ clientWP.on('qr', (qr) => {
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
     let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Cerrar Turno.`);
+    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Ver Contraseña Actual.`);
     logear(usr);
     // logout(usr);
   });
