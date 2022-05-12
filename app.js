@@ -18,7 +18,7 @@ const arrC = [
 const arrD = [
   {
     user: 'Diego.Rendon',
-    password: 'Papitas4657-',
+    password: 'Papitas9824-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -41,112 +41,112 @@ const arr = [
   },
   {
     user: 'juan.vargas2',
-    password: 'Papitas8710-',
+    password: 'Papitas9080-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573219906245',
   },
   {
     user: 'brayan.yanez1',
-    password: 'Papitas4051-',
+    password: 'Papitas6841-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573053599685',
   },
   {
     user: 'RAMON.ROZO',
-    password: 'Papitas8554-',
+    password: 'Papitas331-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573102970334',
   },
   {
     user: 'MANUEL.CORDOBA',
-    password: 'Papitas6873-',
+    password: 'Papitas6322-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
-    password: 'Papitas8107-',
+    password: 'Papitas4088-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
   },
   {
     user: 'carlos.santos',
-    password: 'Papitas5825-',
+    password: 'Papitas5055-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573196431972',
   },
   {
     user: 'daniel.orjuela',
-    password: 'Papitas8605-',
+    password: 'Papitas1584-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573194447056',
   },
   {
     user: 'zaira.luna',
-    password: 'Papitas6768-',
+    password: 'Papitas8112-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573022249441',
   },
   {
     user: 'mario.reyes',
-    password: 'Papitas9653-',
+    password: 'Papitas8827-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573006870762',
   },
   {
     user: 'julian.sanchez1',
-    password: 'Papitas6914-',
+    password: 'Papitas9201-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573152909024',
   },
   {
     user: 'elquin.cascavita',
-    password: 'Papitas3205-',
+    password: 'Papitas997-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573052905250',
   },
   {
     user: 'Diego.Rendon',
-    password: 'Papitas4657-',
+    password: 'Papitas9824-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
   },
   {
     user: 'JUAN.CASTA12',
-    password: 'Papitas8379-',
+    password: 'Papitas2782-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573016650947',
   },
   {
     user: 'roger.rodri',
-    password: 'Papitas8557-',
+    password: 'Papitas5444-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
   },
   {
     user: 'leon.gomez',
-    password: 'Papitas1866-',
+    password: 'Papitas5364-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573013775932',
   },
   {
     user: 'KAREN.HERNANDEZ',
-    password: 'Papitas682-',
+    password: 'Papitas9551-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: 48,
     numero: '573192927421',
@@ -368,7 +368,7 @@ const changePassword = async (usr) => {
   let randomPassword = `Papitas${Math.ceil(Math.random() * 10000)}-`;
   console.log(randomPassword);
   try {
-    // clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cambiando Contraseña* ☜(ﾟヮﾟ☜) ...');
+    clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cambiando Contraseña* ☜(ﾟヮﾟ☜) ...');
     const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
     const page = await browser.newPage();
     await page.setViewport({
@@ -410,7 +410,7 @@ const changePassword = async (usr) => {
     const sed = spawn('sed', ['-i', `s/${usr.password}/${randomPassword}/g`, 'app.js']);
     sed.stdout.on('data', (data) => {
       // * Enviar Mensaje
-      // clientWP.sendMessage(usr.numero + '@c.us', `♦♣ Contraseña Cambiada en SOUL♦♣ \nAhora es: *${randomPassword}*`);
+      clientWP.sendMessage(usr.numero + '@c.us', `♦♣ Contraseña Cambiada en SOUL♦♣ \nAhora es: *${randomPassword}*`);
     });
     console.log(`-> ${usr.user} -> ${randomPassword}`);
   } catch (error) {
