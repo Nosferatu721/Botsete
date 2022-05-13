@@ -437,15 +437,28 @@ clientWP.on('qr', (qr) => {
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
     // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    // clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Ver Contraseña Actual.`);
+    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nEnvia *PAPITAS* para ver el menu con de opciones del Botsete`);
     // logear(usr);
     // logout(usr);
   });
 });
 
 clientWP.on('message', async (msg) => {
-  // * Para Marcar Turno
+  // * Menu Para Todo
   if (msg.type == 'chat' && msg.body == 'PAPITAS') {
+    let numeroChat = msg.from.toString().replace('@c.us', '');
+    let inList = arr.filter((el) => el.numero === numeroChat);
+    if (inList.length >= 1) {
+      const menu = [{ title: 'Opciones:', rows: [{title: 'Marcar Turno'}, {title: 'Cerrar Turno'}, {title: 'Ver mi Contraseña'}] }];
+      const lista = new List('♦♣ Opciones del Botsete: ', 'Seleccione una opción', menu);
+      clientWP.sendMessage(msg.from, lista);
+    } else {
+      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+    }
+  }
+
+  // * Acciones Menu
+  if (msg.type == 'list_response' && msg.body === 'Marcar Turno') {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
     if (inList.length >= 1) {
@@ -454,18 +467,16 @@ clientWP.on('message', async (msg) => {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
-  // * Para Cerrar Turno
-  if (msg.type == 'chat' && msg.body == 'CHOCLITOS') {
+  if (msg.type == 'list_response' && msg.body === 'Cerrar Turno') {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
     if (inList.length >= 1) {
-      logout(inList[0], true, true);
+      logout(inList[0], true);
     } else {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
-  // * Para Cerrar Turno
-  if (msg.type == 'chat' && msg.body == 'BARQUISIMETO') {
+  if (msg.type == 'list_response' && msg.body === 'Ver mi Contraseña') {
     let numeroChat = msg.from.toString().replace('@c.us', '');
     let inList = arr.filter((el) => el.numero === numeroChat);
     if (inList.length >= 1) {
@@ -474,6 +485,37 @@ clientWP.on('message', async (msg) => {
       clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
   }
+
+  // * Para Marcar Turno
+  // if (msg.type == 'chat' && msg.body == 'PAPITAS2') {
+  //   let numeroChat = msg.from.toString().replace('@c.us', '');
+  //   let inList = arr.filter((el) => el.numero === numeroChat);
+  //   if (inList.length >= 1) {
+  //     logear(inList[0], true);
+  //   } else {
+  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+  //   }
+  // }
+  // // * Para Cerrar Turno
+  // if (msg.type == 'chat' && msg.body == 'CHOCLITOS') {
+  //   let numeroChat = msg.from.toString().replace('@c.us', '');
+  //   let inList = arr.filter((el) => el.numero === numeroChat);
+  //   if (inList.length >= 1) {
+  //     logout(inList[0], true);
+  //   } else {
+  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+  //   }
+  // }
+  // * Para Cerrar Turno
+  // if (msg.type == 'chat' && msg.body == 'BARQUISIMETO') {
+  //   let numeroChat = msg.from.toString().replace('@c.us', '');
+  //   let inList = arr.filter((el) => el.numero === numeroChat);
+  //   if (inList.length >= 1) {
+  //     clientWP.sendMessage(inList[0].numero + '@c.us', `♦♣ Tu contraseña de SOUL es: *${inList[0].password}*`);
+  //   } else {
+  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
+  //   }
+  // }
   // * Para Marcar Turno a Alguien
   if (msg.type == 'chat' && msg.body == 'DORITOZ') {
     const options = arr.map((el) => {
@@ -484,8 +526,7 @@ clientWP.on('message', async (msg) => {
     const lista = new List('♦♣ Pa Marcar Turno: ', 'Seleccione una opción', menu);
     clientWP.sendMessage(msg.from, lista);
   }
-  if (msg.type == 'list_response' && !msg.body.includes('XDDD') && !msg.body.includes('XCCC')) {
-    console.log(msg.body);
+  if (msg.type == 'list_response' && !msg.body.includes('XDDD') && !msg.body.includes('XCCC') && msg.body.includes('.')) {
     let inListUser = arr.filter((el) => el.user === msg.body);
     if (inListUser.length >= 1) {
       logear(inListUser[0], true);
