@@ -18,7 +18,7 @@ const arrC = [
 const arrD = [
   {
     user: 'Diego.Rendon',
-    password: 'Papitas8002-',
+    password: 'Papitas5391-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -118,7 +118,7 @@ const arr = [
   },
   {
     user: 'Diego.Rendon',
-    password: 'Papitas8002-',
+    password: 'Papitas5391-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -436,9 +436,9 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Ver Contraseña Actual.`);
-    logear(usr);
+    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    // clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nMarcar Turno:: *7:${minut}am*.\n*->* El Bot se puede demorar hasta 4 minutos en responder.\n*PAPITAS* -> Marcar Turno.\n*CHOCLITOS* -> Cerrar Turno.\n*BARQUISIMETO* -> Ver Contraseña Actual.`);
+    // logear(usr);
     // logout(usr);
   });
 });
