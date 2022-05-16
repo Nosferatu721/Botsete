@@ -3,10 +3,10 @@ const os = require('os');
 const { spawn } = require('child_process');
 const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
 
-const marcarTurnoRandom = () => Math.ceil(Math.random() * 10) + 5;
+const marcarTurnoRandom = () => Math.ceil(Math.random() * 12) + 5;
 const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
 
-const arrC = [
+const arr = [
   {
     user: 'elkin.torres',
     password: 'Papitas8122-',
@@ -24,7 +24,7 @@ const arrD = [
     numero: '573003079207',
   },
 ];
-const arr = [
+const arrC = [
   {
     user: 'elkin.torres',
     password: 'Papitas8122-',
@@ -147,8 +147,8 @@ const arr = [
   {
     user: 'KAREN.HERNANDEZ',
     password: 'Papitas3212-',
-    minTurno: marcarTurnoRandom(),
-    cerrarTurno: cerrarTurnoRandom() + 10,
+    minTurno: marcarTurnoRandom() + 35,
+    cerrarTurno: cerrarTurnoRandom() + 12,
     numero: '573192927421',
   },
 ];
@@ -159,6 +159,8 @@ const logear = async (usr, forzar = false, reintentar = false) => {
   let hoy = new Date(Date.now()),
     hora = hoy.getHours(),
     minutoActual = hoy.getMinutes();
+
+  if (usr.user === 'KAREN.HERNANDEZ' && hora === 6 && minutoActual === usr.minTurno) forzar = true;
 
   if ((hora === 7 && minutoActual === usr.minTurno) || forzar) {
     try {
@@ -242,7 +244,7 @@ const logear = async (usr, forzar = false, reintentar = false) => {
               }
             }, 3000);
           }
-        }, 2000);
+        }, 3000);
       }, 5000);
       return;
     } catch (error) {
@@ -251,7 +253,7 @@ const logear = async (usr, forzar = false, reintentar = false) => {
       return;
     }
   } else {
-    console.log(usr.user, 'No es hora de MARCAR ಠ_ಠ', hora, minutoActual);
+    // console.log(usr.user, 'No es hora de MARCAR ಠ_ಠ', hora, minutoActual);
     setTimeout(() => {
       logear(usr);
     }, 30000);
@@ -262,9 +264,12 @@ const logear = async (usr, forzar = false, reintentar = false) => {
 const logout = async (usr, forzar = false, reintentar = false) => {
   let hoy = new Date(Date.now()),
     hora = hoy.getHours(),
+    horaCerrar = 17,
     minutoActual = hoy.getMinutes();
 
-  if ((hora === 17 && minutoActual === usr.cerrarTurno) || forzar) {
+  if (hora < 15) return
+  if (usr.user === 'Diego.Rendon') horaCerrar = 18;
+  if ((hora === horaCerrar && minutoActual === usr.cerrarTurno) || forzar) {
     try {
       clientWP.sendMessage(usr.numero + '@c.us', '(☞ﾟヮﾟ)☞ *Cerrando Turno* ☜(ﾟヮﾟ☜) ...');
       const browser = await puppeteer.launch({ headless: false, executablePath: os.platform() === 'linux' ? '/usr/bin/google-chrome' : 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
@@ -347,7 +352,7 @@ const logout = async (usr, forzar = false, reintentar = false) => {
               }
             }, 3000);
           }
-        }, 2000);
+        }, 3000);
       }, 5000);
       return;
     } catch (error) {
@@ -356,7 +361,7 @@ const logout = async (usr, forzar = false, reintentar = false) => {
       return;
     }
   } else {
-    console.log(usr.user, 'No es hora de CERRAR TURNO ಠ_ಠ Sap@prr', hora, minutoActual);
+    // console.log(usr.user, 'No es hora de CERRAR TURNO ಠ_ಠ Sap@prr', hora, minutoActual);
     setTimeout(() => {
       logout(usr);
     }, 30000);
@@ -436,86 +441,43 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nEnvia *PAPITAS* para ver el menu con de opciones del Botsete`);
-    // logear(usr);
+    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    if (usr.user === 'KAREN.HERNANDEZ') {
+      clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará mañana a las: *6:${minut}*\nSe cerrará hoy a las: *5:${minut}*\n*PAPITAS* para ver el menu de opciones`);
+    } else {
+      clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará mañana a las: *7:${minut}*\nSe cerrará hoy a las: *5:${minut}*\n*PAPITAS* para ver el menu de opciones`);
+    }
+    logear(usr);
     // logout(usr);
   });
 });
 
 clientWP.on('message', async (msg) => {
-  // * Menu Para Todo
-  if (msg.type == 'chat' && msg.body == 'PAPITAS') {
-    let numeroChat = msg.from.toString().replace('@c.us', '');
-    let inList = arr.filter((el) => el.numero === numeroChat);
-    if (inList.length >= 1) {
-      const menu = [{ title: 'Opciones:', rows: [{title: 'Marcar Turno'}, {title: 'Cerrar Turno'}, {title: 'Ver mi Contraseña'}] }];
+  let numeroChat = msg.from.toString().replace('@c.us', '');
+  let inList = arr.filter((el) => el.numero === numeroChat);
+
+  if (inList.length >= 1) {
+    // * Mostrar Opciones
+    if (msg.type == 'chat' && msg.body == 'PAPITAS') {
+      const menu = [{ title: 'Opciones:', rows: [{ title: 'Marcar Turno' }, { title: 'Cerrar Turno' }, { title: 'Ver mi Contraseña de SOUL' }] }];
       const lista = new List('♦♣ Opciones del Botsete: ', 'Seleccione una opción', menu);
       clientWP.sendMessage(msg.from, lista);
-    } else {
-      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
-  }
 
-  // * Acciones Menu
-  if (msg.type == 'list_response' && msg.body === 'Marcar Turno') {
-    let numeroChat = msg.from.toString().replace('@c.us', '');
-    let inList = arr.filter((el) => el.numero === numeroChat);
-    if (inList.length >= 1) {
+    // * Opciones
+    if (msg.type == 'list_response' && msg.body === 'Marcar Turno') {
       logear(inList[0], true);
-    } else {
-      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
-  }
-  if (msg.type == 'list_response' && msg.body === 'Cerrar Turno') {
-    let numeroChat = msg.from.toString().replace('@c.us', '');
-    let inList = arr.filter((el) => el.numero === numeroChat);
-    if (inList.length >= 1) {
+    if (msg.type == 'list_response' && msg.body === 'Cerrar Turno') {
       logout(inList[0], true);
-    } else {
-      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
-  }
-  if (msg.type == 'list_response' && msg.body === 'Ver mi Contraseña') {
-    let numeroChat = msg.from.toString().replace('@c.us', '');
-    let inList = arr.filter((el) => el.numero === numeroChat);
-    if (inList.length >= 1) {
+    if (msg.type == 'list_response' && msg.body === 'Ver mi Contraseña de SOUL') {
       clientWP.sendMessage(inList[0].numero + '@c.us', `♦♣ Tu contraseña de SOUL es: *${inList[0].password}*`);
-    } else {
-      clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
     }
+  } else {
+    clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
   }
 
-  // * Para Marcar Turno
-  // if (msg.type == 'chat' && msg.body == 'PAPITAS2') {
-  //   let numeroChat = msg.from.toString().replace('@c.us', '');
-  //   let inList = arr.filter((el) => el.numero === numeroChat);
-  //   if (inList.length >= 1) {
-  //     logear(inList[0], true);
-  //   } else {
-  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
-  //   }
-  // }
-  // // * Para Cerrar Turno
-  // if (msg.type == 'chat' && msg.body == 'CHOCLITOS') {
-  //   let numeroChat = msg.from.toString().replace('@c.us', '');
-  //   let inList = arr.filter((el) => el.numero === numeroChat);
-  //   if (inList.length >= 1) {
-  //     logout(inList[0], true);
-  //   } else {
-  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
-  //   }
-  // }
-  // * Para Cerrar Turno
-  // if (msg.type == 'chat' && msg.body == 'BARQUISIMETO') {
-  //   let numeroChat = msg.from.toString().replace('@c.us', '');
-  //   let inList = arr.filter((el) => el.numero === numeroChat);
-  //   if (inList.length >= 1) {
-  //     clientWP.sendMessage(inList[0].numero + '@c.us', `♦♣ Tu contraseña de SOUL es: *${inList[0].password}*`);
-  //   } else {
-  //     clientWP.sendMessage(msg.from, 'No estas en la lista ╰（‵□′）╯, cualquier cosa por Nequi jajaja');
-  //   }
-  // }
   // * Para Marcar Turno a Alguien
   if (msg.type == 'chat' && msg.body == 'DORITOZ') {
     const options = arr.map((el) => {
