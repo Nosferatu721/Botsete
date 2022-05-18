@@ -1,12 +1,13 @@
 const puppeteer = require('puppeteer');
 const os = require('os');
+const colors = require('colors')
 const { spawn } = require('child_process');
 const { Client, Buttons, List, MessageMedia, LocalAuth } = require('whatsapp-web.js');
 
-const marcarTurnoRandom = () => Math.ceil(Math.random() * 12) + 5;
-const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 35;
+const marcarTurnoRandom = () => Math.ceil(Math.random() * 15) + 5;
+const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 36;
 
-const arr = [
+const arrC = [
   {
     user: 'elkin.torres',
     password: 'Papitas8122-',
@@ -24,7 +25,7 @@ const arrD = [
     numero: '573003079207',
   },
 ];
-const arrC = [
+const arr = [
   {
     user: 'elkin.torres',
     password: 'Papitas8122-',
@@ -34,7 +35,7 @@ const arrC = [
   },
   {
     user: 'eyhson.castro',
-    password: 'Papitas9574-',
+    password: 'Papitas9451-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
@@ -152,7 +153,7 @@ const arrC = [
     numero: '573192927421',
   },
 ];
-arr.forEach((el) => console.log(`${el.minTurno} ---- ${el.cerrarTurno} \t${el.user}`));
+arr.forEach((el) => console.log(`${el.minTurno} ---- ${el.cerrarTurno} \t${el.user}`.brightGreen.italic));
 
 // * Funcion pa Logear
 const logear = async (usr, forzar = false, reintentar = false) => {
@@ -441,13 +442,13 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
-    if (usr.user === 'KAREN.HERNANDEZ') {
-      clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará mañana a las: *6:${minut}*\nSe cerrará hoy a las: *5:${minut}*\n*PAPITAS* para ver el menu de opciones`);
-    } else {
-      clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará mañana a las: *7:${minut}*\nSe cerrará hoy a las: *5:${minut}*\n*PAPITAS* para ver el menu de opciones`);
-    }
-    logear(usr);
+    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    // if (usr.user === 'KAREN.HERNANDEZ') {
+    //   clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará a las: *6:${minut}*\n*PAPITAS* para ver el menu de opciones`);
+    // } else {
+    //   clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará a las: *7:${minut}*\n*PAPITAS* para ver el menu de opciones`);
+    // }
+    // logear(usr);
     // logout(usr);
   });
 });
@@ -462,6 +463,13 @@ clientWP.on('message', async (msg) => {
       const menu = [{ title: 'Opciones:', rows: [{ title: 'Marcar Turno' }, { title: 'Cerrar Turno' }, { title: 'Ver mi Contraseña de SOUL' }] }];
       const lista = new List('♦♣ Opciones del Botsete: ', 'Seleccione una opción', menu);
       clientWP.sendMessage(msg.from, lista);
+    }
+    if (msg.type == 'chat' && msg.body == 'CCCC') {
+      let text = ``
+      arr.forEach(el => {
+        text += `${el.user}:\t *${el.password}\n*`
+      })
+      clientWP.sendMessage(msg.from, text);
     }
 
     // * Opciones
