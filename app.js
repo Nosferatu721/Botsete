@@ -10,7 +10,7 @@ const cerrarTurnoRandom = () => Math.ceil(Math.random() * 10) + 36;
 const arrC = [
   {
     user: 'elkin.torres',
-    password: 'Papitas8122-',
+    password: 'Papitas9963-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
@@ -19,7 +19,7 @@ const arrC = [
 const arrD = [
   {
     user: 'Diego.Rendon',
-    password: 'Papitas5391-',
+    password: 'Papitas4906-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
@@ -28,126 +28,126 @@ const arrD = [
 const arr = [
   {
     user: 'elkin.torres',
-    password: 'Papitas8122-',
+    password: 'Papitas9963-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573134814366',
   },
   {
     user: 'eyhson.castro',
-    password: 'Papitas9451-',
+    password: 'Papitas9227-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573106542257',
   },
   {
     user: 'juan.vargas2',
-    password: 'Papitas8653-',
+    password: 'Papitas1188-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573219906245',
   },
   {
     user: 'brayan.yanez1',
-    password: 'Papitas1086-',
+    password: 'Papitas1247-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573053599685',
   },
   {
     user: 'RAMON.ROZO',
-    password: 'Papitas4896-',
+    password: 'Papitas4144-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573102970334',
   },
   {
     user: 'MANUEL.CORDOBA',
-    password: 'Papitas3054-',
+    password: 'Papitas8614-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573137485133',
   },
   {
     user: 'Juan.Mendoza',
-    password: 'Papitas1318-',
+    password: 'Papitas9240-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573213776554',
   },
   {
     user: 'carlos.santos',
-    password: 'Papitas7013-',
+    password: 'Papitas2670-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573196431972',
   },
   {
     user: 'daniel.orjuela',
-    password: 'Papitas2799-',
+    password: 'Papitas9037-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573194447056',
   },
   {
     user: 'zaira.luna',
-    password: 'Papitas7074-',
+    password: 'Papitas2916-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573022249441',
   },
   {
     user: 'mario.reyes',
-    password: 'Papitas139-',
+    password: 'Papitas464-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573006870762',
   },
   {
     user: 'julian.sanchez1',
-    password: 'Papitas9281-',
+    password: 'Papitas8885-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573152909024',
   },
   {
     user: 'elquin.cascavita',
-    password: 'Papitas8795-',
+    password: 'Papitas8460-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573052905250',
   },
   {
     user: 'Diego.Rendon',
-    password: 'Papitas5391-',
+    password: 'Papitas4906-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573003079207',
   },
   {
     user: 'JUAN.CASTA12',
-    password: 'Papitas8753-',
+    password: 'Papitas5839-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573016650947',
   },
   {
     user: 'roger.rodri',
-    password: 'Papitas8803-',
+    password: 'Papitas4250-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573125634645',
   },
   {
     user: 'leon.gomez',
-    password: 'Papitas775-',
+    password: 'Papitas5406-',
     minTurno: marcarTurnoRandom(),
     cerrarTurno: cerrarTurnoRandom(),
     numero: '573013775932',
   },
   {
     user: 'KAREN.HERNANDEZ',
-    password: 'Papitas3212-',
+    password: 'Papitas3059-',
     minTurno: marcarTurnoRandom() + 35,
     cerrarTurno: cerrarTurnoRandom() + 12,
     numero: '573192927421',
@@ -442,14 +442,14 @@ clientWP.on('qr', (qr) => {
 
 clientWP.on('ready', async () => {
   arr.forEach((usr) => {
-    // let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
+    let minut = usr.minTurno < 10 ? `0${usr.minTurno}` : usr.minTurno;
     // if (usr.user === 'KAREN.HERNANDEZ') {
     //   clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará a las: *6:${minut}*\n*PAPITAS* para ver el menu de opciones`);
     // } else {
     //   clientWP.sendMessage(usr.numero + '@c.us', `*♦♣ ${usr.user.toUpperCase()} ♠♥*\nSe marcará a las: *7:${minut}*\n*PAPITAS* para ver el menu de opciones`);
     // }
     // logear(usr);
-    // logout(usr);
+    logout(usr);
   });
 });
 
@@ -459,7 +459,7 @@ clientWP.on('message', async (msg) => {
 
   if (inList.length >= 1) {
     // * Mostrar Opciones
-    if (msg.type == 'chat' && msg.body == 'PAPITAS') {
+    if (msg.type == 'chat' && (msg.body == 'PAPITAS' || msg.body == 'Papitas' || msg.body == 'papitas')) {
       const menu = [{ title: 'Opciones:', rows: [{ title: 'Marcar Turno' }, { title: 'Cerrar Turno' }, { title: 'Ver mi Contraseña de SOUL' }] }];
       const lista = new List('♦♣ Opciones del Botsete: ', 'Seleccione una opción', menu);
       clientWP.sendMessage(msg.from, lista);
@@ -467,7 +467,7 @@ clientWP.on('message', async (msg) => {
     if (msg.type == 'chat' && msg.body == 'CCCC') {
       let text = ``
       arr.forEach(el => {
-        text += `${el.user}:\t *${el.password}\n*`
+        text += `${el.user}:\t *${el.password}*\n`
       })
       clientWP.sendMessage(msg.from, text);
     }
